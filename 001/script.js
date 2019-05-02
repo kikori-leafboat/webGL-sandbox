@@ -28,6 +28,7 @@
     let targetDOM    = null;
     let run = true;
     let isDown = false;
+    let count = 0;
     // three objects
     let scene;
     let camera;
@@ -110,21 +111,13 @@
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
 
-                // torus
-                geometry = new THREE.TorusGeometry(1.0, 0.4, 32, 32);
-                torus = new THREE.Mesh(geometry, material);
-                torus.position.x = BOX_START_POS.x + i;
-                torus.position.y = BOX_START_POS.y - j;
-                scene.add(torus);
-                boxes.push(torus);
-
-                // // box
-                // geometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
-                // box = new THREE.Mesh(geometry, material);
-                // box.position.x = BOX_START_POS.x + i;
-                // box.position.y = BOX_START_POS.y - j;
-                // scene.add(box);
-                // boxes.push(box);
+                // box
+                geometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
+                box = new THREE.Mesh(geometry, material);
+                box.position.x = BOX_START_POS.x + i;
+                box.position.y = BOX_START_POS.y - j;
+                scene.add(box);
+                boxes.push(box);
             }
         }
 
@@ -162,8 +155,40 @@
         }, false);
 
         // rendering
-        render();
+        update();
     }, false);
+
+    function update() {
+        if(run){requestAnimationFrame(update);}
+
+        // requestAnimationFrame(()=>{
+        //     update();
+        // });
+
+        translate();
+        render();
+
+        count += 0.01;
+    }
+
+    function translate() {
+        // if (count >= 100) {
+        //     count = 0;
+        // }
+
+        for (let i = 0; i < 100; i++) {
+
+            box = boxes[i];
+            box.scale.x = Math.sin(count);
+            box.scale.y = Math.sin(count);
+            box.scale.z = Math.sin(count);
+        }
+    }
+                
+    // function deg2rad(degrees)
+    // {
+    //   return degrees * (Math.PI/180);
+    // }    
 
     // - レンダリング処理 -----------------------------------------------------
     // 宣言セクションと初期化セクションで全ての準備が整っていれば、残すはレンダ
@@ -176,7 +201,6 @@
     // ------------------------------------------------------------------------
     // rendering
     function render(){
-        if(run){requestAnimationFrame(render);}
 
         for (let i = 0; i < boxes.length; i++) {
             boxes[i].rotation.y    += 0.01;
