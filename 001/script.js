@@ -51,15 +51,15 @@
         clearColor: 0x333333
     };
     const MATERIAL_PARAM = {
-        color: 0xff9933,
-        specular: 0xffffff
+        color: 0xCCD4FC,
+        specular: 0xF9CADB
     };
     const MATERIAL_PARAM_POINT = {
         color: 0xff9933,
         size: 0.1
     };
     const DIRECTIONAL_LIGHT_PARAM = {
-        color: 0xffffff,
+        color: 0xF9CCCA,
         intensity: 1.0,
         x: 1.0,
         y: 1.0,
