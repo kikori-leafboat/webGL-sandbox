@@ -106,9 +106,9 @@
         );
         scene.add(ambientLight);
 
-        // // helper
-        axesHelper = new THREE.AxesHelper(5.0);
-        scene.add(axesHelper);
+        // // // helper
+        // axesHelper = new THREE.AxesHelper(5.0);
+        // scene.add(axesHelper);
 
         // events
         window.addEventListener('keydown', (eve) => {
