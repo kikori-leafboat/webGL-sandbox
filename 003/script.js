@@ -106,7 +106,7 @@
         );
         scene.add(ambientLight);
 
-        // // helper
+        // // // helper
         // axesHelper = new THREE.AxesHelper(5.0);
         // scene.add(axesHelper);
 
@@ -131,26 +131,46 @@
     function update() {
         if(run){requestAnimationFrame(update);}
 
-        // requestAnimationFrame(()=>{
-        //     update();
-        // });
-
         translate();
         render();
 
-        count += 0.01;
     }
 
+    let cubeCount = 0;
+    let phiCount = 0;
     function translate() {
-        for (let i = 0; i < 100; i++) {
-
-            box = boxes[i];
-            box.scale.x = Math.sin(count);
-            box.scale.y = Math.sin(count);
-            box.scale.z = Math.sin(count);
+        
+        if (phiCount >= 360) {
+            phiCount = 0;
         }
+        
+        if (cubeCount >= 100) {
+            cubeCount = 0;
+        }
+
+
+        let a = 0;
+        if (cubeCount%2 == 0) {
+            a = -1 * Math.random(-1, 1);;
+        } else {
+            a = Math.random(-1, 1);
+        }
+        
+        box = boxes[cubeCount];
+        box.position.x = 5 * Math.sqrt(1- a * a) * Math.cos(deg2rad(phiCount));
+        box.position.y = 5 * Math.sqrt(1- a * a) * Math.sin(deg2rad(phiCount));
+        box.position.z = 5 * a;
+
+        count+= 0.1;
+        phiCount+= 4;
+        cubeCount++;
     }
                 
+    function deg2rad(degrees)
+    {
+      return degrees * (Math.PI/180);
+    }    
+
     // rendering
     function render(){
 
