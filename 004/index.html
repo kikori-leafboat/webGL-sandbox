@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../lib/three.js"></script>
+        <script src="../lib/OrbitControls.js"></script>
+        <script src="script.js"></script>
+        <style>
+            * {margin: 0; padding: 0;}
+            html, body {
+                overflow: hidden;
+            }
+
+            /* inspired by http://webglworks.o0o0.jp/sketch_001/ReflectionDance/ */
+            html {
+            --bgColor1: #eaadbd;
+            --bgColor2: #554562;
+
+            background: var(--bgColor1); /* Old browsers */
+            background: -moz-linear-gradient(top, var(--bgColor1) 0%, var(--bgColor2) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, var(--bgColor1) 0%, var(--bgColor2) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, var(--bgColor1) 0%, var(--bgColor2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='var(--bgColor1)', endColorstr='var(--bgColor2)',GradientType=0 ); /* IE6-9 */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="webgl"></div>
+    </body>
+</html>
+
