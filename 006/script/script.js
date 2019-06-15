@@ -125,11 +125,14 @@
 
     function render(){
         if (isHovered) {
-            iTime += 0.01;
-        } else {
+            if (iTime < 1.0) {
+                iTime += 0.01;
+            }
+        } else if (iTime > 0) {
             iTime -= 0.01;
         }
-        console.log(iTime);
+
+        // console.log(iTime);
         // gl3.gl.uniform1f(tLoc,.001*(Date.now() - startTime));
         gl3.gl.uniform1f(tLoc, iTime);
         window.requestAnimationFrame(render);
@@ -137,7 +140,7 @@
         // ビューを設定
         gl3.sceneView(0, 0, canvasSize, canvasSize);
         // シーンのクリア
-        gl3.sceneClear([0.7, 0.7, 0.7, 1.0]);
+        gl3.sceneClear([1.0, 1.0, 1.0, 1.0]);
         // どのプログラムオブジェクトを利用するか明示的に設定
         prg.useProgram();
         // プログラムに頂点バッファをアタッチ
