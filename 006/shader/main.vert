@@ -7,6 +7,7 @@ varying float time;
 void main(){
     vColor = color * globalColor;
     time = iTime;
-    gl_Position = vec4(position.x, position.y, position.z, 1.0);
+
+    gl_Position = vec4(position.x * sin(iTime + 0.5), position.y * sin(iTime + 0.5), position.z, 1.0);
 }
 

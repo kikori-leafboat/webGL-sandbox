@@ -102,7 +102,7 @@
         }
 
         // 色定義
-        let w = [1.0, 1.0, 1.0, 1.0];
+        let w = [1.2, 1.2, 1.2, 1.0];
         let r = [0.59, 0.26, 0.52, 1.0];
         let g = [0.0, 1.0, 0.0, 1.0];
         let b = [0.38, 0.25, 0.59, 1.0];
@@ -124,6 +124,8 @@
     }
 
     function render(){
+        window.requestAnimationFrame(render);
+        
         if (isHovered) {
             if (iTime < 1.0) {
                 iTime += 0.01;
@@ -135,7 +137,6 @@
         // console.log(iTime);
         // gl3.gl.uniform1f(tLoc,.001*(Date.now() - startTime));
         gl3.gl.uniform1f(tLoc, iTime);
-        window.requestAnimationFrame(render);
 
         // ビューを設定
         gl3.sceneView(0, 0, canvasSize, canvasSize);
