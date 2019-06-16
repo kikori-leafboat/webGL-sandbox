@@ -8,6 +8,9 @@
 // ============================================================================
 
 (() => {
+
+    const pane = new Tweakpane();
+
     // variables
     let canvas;     // canvas エレメントへの参照
     let canvasSize; // canvas の大きさ（ここでは正方形の一辺の長さ）
@@ -19,6 +22,10 @@
     // let startTime;
     let isHovered = false;
     let iTime = 0.0;
+
+    let PARAM = {
+        angleCount: 5
+    }
 
     window.addEventListener('load', () => {
         // glcubic の初期化
@@ -41,6 +48,13 @@
         canvas.addEventListener('mouseleave', () => {
             isHovered = false;
         }, false);
+
+        const pane = new Tweakpane();
+        pane.addInput(PARAM, 'angleCount', {
+            step: 1,
+            min: 3,
+            max: 15,
+          });
 
         // シェーダロードへ移行
         loadShader();
@@ -73,7 +87,7 @@
         // --------------------------------------------------------------------
         // 頂点の座標データ
 
-        let angleCount = 5;
+        let angleCount = PARAM.angleCount;
 
         // 角度計算
         let rad = 1 / angleCount * 2 * Math.PI;
@@ -120,7 +134,7 @@
     }
 
     function render(){
-        window.requestAnimationFrame(render);
+        window.requestAnimationFrame(initialize);
         
         if (isHovered) {
             if (iTime < 1.0) {
