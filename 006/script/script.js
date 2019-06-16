@@ -24,7 +24,9 @@
     let iTime = 0.0;
 
     let PARAM = {
-        angleCount: 5
+        angleCount: 5,
+        centerColor: "#FFFFFF",
+        color: "#624498"
     }
 
     window.addEventListener('load', () => {
@@ -49,12 +51,17 @@
             isHovered = false;
         }, false);
 
+        // set up tweak pane
         const pane = new Tweakpane();
+
         pane.addInput(PARAM, 'angleCount', {
             step: 1,
             min: 3,
             max: 15,
           });
+
+        pane.addInput(PARAM, 'centerColor');
+        pane.addInput(PARAM, 'color');
 
         // シェーダロードへ移行
         loadShader();
@@ -112,10 +119,15 @@
         }
 
         // 色定義
-        let w = [1.2, 1.2, 1.2, 1.0];
-        let r = [0.59, 0.26, 0.52, 1.0];
-        let g = [0.0, 1.0, 0.0, 1.0];
-        let b = [0.38, 0.25, 0.59, 1.0];
+        // let w = [1.2, 1.2, 1.2, 1.0];
+        // let r = [0.59, 0.86, 0.52, 1.0];
+        // let g = [0.0, 1.0, 0.0, 1.0];
+        // let b = [0.38, 0.25, 0.59, 1.0];
+        let centerColor = hexToRgb(PARAM.centerColor);
+        let backgroundColor = hexToRgb(PARAM.color);
+        let w = [centerColor.r, centerColor.g, centerColor.b, 1.0];
+        // let r = [0.59, 0.86, 0.52, 1.0];
+        let b = [backgroundColor.r, backgroundColor.g, backgroundColor.b, 1.0];
 
         color = new Array();
 
@@ -181,6 +193,21 @@
         gl3.drawArrays(gl3.gl.TRIANGLES, position.length / 3); // Trianglesは頂点３つでワンセット
         
     }
+
+    function hexToRgb(hex) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+          return r + r + g + g + b + b;
+        });
+      
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16) /256,
+          g: parseInt(result[2], 16) /256,
+          b: parseInt(result[3], 16) /256
+        } : null;
+      }
 })();
 
         // let angleCount = 15;
