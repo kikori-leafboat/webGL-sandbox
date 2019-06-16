@@ -93,12 +93,8 @@
         // 点配列の作成
         position = new Array();
         for (let i = 0; i < points.length;i++) {
-            // the last one
-            if (i+1 == points.length) {
-                position.push(...mid, ...points[i], ...points[0]);
-            } else {
-                position.push(...mid, ...points[i], ...points[i + 1]);
-            }
+            let j = (i + 1) % points.length;
+            position.push(...mid, ...points[i], ...points[j]);
         }
 
         // 色定義
